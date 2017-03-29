@@ -1,0 +1,51 @@
+@import '../../../assets/variables.scss';
+.button {
+    border-radius: 3px;
+    outline: none;
+    background-color: $primary-green;
+    min-height: 3rem;
+    min-width: 3rem;
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+    border: 0;
+    span {
+        color: #fff;
+        font-size: 1rem;
+        padding: 1rem;
+    }
+    &:hover {
+        background-color: darken($primary-green, 5%);
+    }
+
+    &.clear {
+        background-color: transparent;
+        border: 2px solid $primary-green;
+        border: transparent;
+        border-radius: 0;
+        span {
+                color: $primary-green;
+            }
+        &:hover {
+            border-bottom: 2px solid $primary-green;
+        }
+    }
+
+    &.outline {
+        border: 1px solid $primary-green;
+        background-color: #fff;
+        span {
+            color: $primary-green;
+        }
+        &:hover {
+            background-color: darken($primary-green, 5%);
+            span {
+                color: #fff;
+            }
+        }
+    }
+    &.animate {
+        &:hover {
+            transform: translateY(1rem);
+        }
+    }
+}

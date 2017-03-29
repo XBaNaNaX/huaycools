@@ -1,0 +1,53 @@
+@import '../../assets/variables.scss';
+.navs {
+    display: block;
+    width: 100%;
+    max-height: 3.5rem;
+    background-color: coral;
+}
+
+.logo {
+    width: auto;
+    height: 3.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 3rem;
+    img {
+        width: 3.5rem;
+        height: auto;
+        cursor: pointer;
+    }
+    span {
+        padding: 0 2rem;
+        cursor: pointer;
+        color: white;
+    }
+}
+
+.menu {
+    display: inline-flex;
+    list-style: none;
+    flex: 1;
+    justify-content: flex-end;
+    li {
+        padding-right: 2rem;
+        color: $nav-menu-color;
+        cursor: pointer;
+        transition: 300ms ease-in-out;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        a {
+            text-decoration: none;
+            color: $white;
+        }
+        &:hover {
+           transform: translateY(0.1rem);
+        }
+    }
+    li:last-child {
+        padding-left: 0;
+    }
+}

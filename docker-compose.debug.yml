@@ -1,0 +1,17 @@
+
+version: '2'
+
+services:
+  hello-world:
+    image: hello-world:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 9000:9000
+      - 5858:5858
+    volumes:
+      - .:/usr/src/app
+    command: node --debug=5858 scripts/start.js
