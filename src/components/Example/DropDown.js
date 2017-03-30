@@ -8,7 +8,10 @@ const getOptions = function (input, callback) {
         callback(null, {
             options: [
                 { value: 'one', label: 'One' },
-                { value: 'two', label: 'Two' }
+                { value: 'two', label: 'Two' },
+                { value: 'three', label: 'Three' },
+                { value: 'four', label: 'Four' },
+                { value: 'five', label: 'Five' }
             ],
             // CAREFUL! Only set this to true when there are no more options,
             // or more specific queries will not be sent to the server.
@@ -28,9 +31,15 @@ class DropDown extends Component {
 
     logChange(val) {
         console.log(val);
-        this.setState({
-            value: val.value
-        })
+        if(this.props.multi) {
+            this.setState({
+                value: val
+            })
+        } else {
+            this.setState({
+                value: val.value
+            })
+        }
     }
 
     render() {
@@ -40,8 +49,12 @@ class DropDown extends Component {
                 loadOptions={getOptions}
                 onChange={this.logChange.bind(this)}
                 value={this.state.value}
-                placeholder='Example select..'
+                placeholder={this.props.placeholder}
                 backspaceRemoves={true}
+                className={this.props.className}
+                multi={this.props.multi}
+                deleteRemoves={true}
+                resetValue={[]}
             />
         );
     }

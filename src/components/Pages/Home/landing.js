@@ -12,6 +12,9 @@ import ResponsiveBlock from '../../../components/Example/ResponsiveBlock';
 // Responsive block
 import DropDown from '../../../components/Example/DropDown';
 
+// View
+import View from '../../../components/View';
+
 const today = new Date();
 const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
 
@@ -85,13 +88,19 @@ class Landing extends Component {
                 <hr/>
                 <h1 style={{ display: 'block' }}>React - Select</h1>
                 <div style={{ display: 'block', textAlign: 'center' }}>
-                    <DropDown />
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                        <View styles={{width: 33.33+'%',margin:1 + 'rem'}} node={<DropDown placeholder="Example select ..." className={'select--flex'} />}/>
+                        <View styles={{width: 33.33+'%',margin:1 + 'rem'}} node={<DropDown placeholder="Example select ..." className={'select--flex'} />}/>
+                        <View styles={{width: 33.33+'%',margin:1 + 'rem'}} node={<DropDown placeholder="Example select ..." className={'select--flex'} />}/>
+                    </div>
+                    <View styles={{margin:1 + 'rem'}} node={<DropDown multi={true} placeholder="Example multi select ..." className={'select--flex'} />}/>
                 </div>
                 <hr />
                 <h1 style={{ display: 'block' }}>Responsive Block</h1>
                 <div style={{ display: 'block', textAlign: 'center' }}>
                     <ResponsiveBlock styles={blockStyle} />
                 </div>
+                <hr/>
             </div>
         );
     }
