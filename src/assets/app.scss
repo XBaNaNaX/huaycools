@@ -1,0 +1,6 @@
+@import '../assets/mixin.scss';
+@import '../assets/variables.scss';
+
+span {
+    @include longshadow('#E13E06');
+}

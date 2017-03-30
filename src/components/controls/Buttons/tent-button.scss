@@ -1,0 +1,20 @@
+.button--danger {
+    border-color: #ff4136;
+    background-color: #ff4136;
+    color: #fff;
+    &:hover {
+        border-color: #b60a00;
+        background-color: #ff1103;
+        color: #fff;
+    } 
+}
+.button--primary {
+    border-color: #46a8bf;
+    background-color: darken(#46a8bf,5%);
+    color: #fff;
+    &:hover {
+        border-color: darken(#46a8bf,5%);
+        background-color: #46a8bf;
+        color: #fff;
+    } 
+}

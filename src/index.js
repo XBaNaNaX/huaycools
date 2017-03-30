@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 // tent css
-// import 'tent-css/dist/tent.css'
+import 'tent-css/dist/tent.css'
 
 import todoApp from './reducers'
 import App from './components/App';
@@ -15,8 +15,8 @@ import createHistory from 'history/createBrowserHistory'
 
 import logo from './logo.svg';
 import Navs from './components/Nav'
-import StaticNav from './components/Nav/staticNav'
-import Home from './components/Pages/Home'
+// import StaticNav from './components/Nav/staticNav'
+import Home from './components/Pages/Home/landing'
 
 import {
     BrowserRouter as Router,
@@ -71,7 +71,6 @@ render(<
                     logo={logo}
                     menus={menus}
                 />
-                {/*<StaticNav/>*/}
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/app" component={App} />

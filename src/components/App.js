@@ -4,7 +4,6 @@ import './App.css';
 import TodoApp from '../components/Todo'
 import Button from '../components/controls/Buttons'
 
-
 class App extends Component {
   render() {
     return (
