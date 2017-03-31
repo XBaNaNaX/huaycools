@@ -32,7 +32,8 @@ const Navs = ({
     )
 
 Navs.propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    menus: PropTypes.array.isRequired
 }
 
 export default Navs

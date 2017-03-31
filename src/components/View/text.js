@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 class Text extends Component {
     render() {
@@ -11,6 +11,11 @@ class Text extends Component {
             </span>
         )
     }
+}
+
+Text.propTypes = {
+    styles: PropTypes.object,
+    label: PropTypes.string.isRequired
 }
 
 export default Text

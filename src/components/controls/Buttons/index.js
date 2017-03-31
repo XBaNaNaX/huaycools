@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import classnames from 'classnames'
 
@@ -18,6 +18,15 @@ const btnStyle = classnames(
         <span style={props.labelStyle}>{props.text}</span>
     </button>
     )
+}
+
+Button.propTypes = {
+    handleClick: PropTypes.func,
+    theme: PropTypes.string,
+    isCleared: PropTypes.bool,
+    buttonStyle: PropTypes.object,
+    labelStyle: PropTypes.object,
+    text: PropTypes.string
 }
 
 export default Button
