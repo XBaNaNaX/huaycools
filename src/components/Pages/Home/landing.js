@@ -17,6 +17,8 @@ import Text from '../../../components/View/text';
 // Calendar
 import FullCalendar from '../../../components/controls/FullCalendar';
 
+import Loading from '../../../components/Loading'
+
 // Modal
 import SkyLight from 'react-skylight';
 
@@ -45,7 +47,73 @@ class Landing extends Component {
                 { "text": "hello" },
                 { "text": "hello" }
             ],
-            dateSelected: new Date()
+            dateSelected: new Date(),
+            arcenums: null,
+            listArcenums: null,
+            arcenumsSelected: null,
+            arcenumsSelectedDetail: null,
+            isLoading: false
+        }
+
+        this.showLoading = this.showLoading.bind(this);
+        this.hideLoading = this.hideLoading.bind(this);
+    }
+
+    showLoading() {
+        this.setState({ isLoading: true })
+    }
+
+    hideLoading() {
+        this.setState({ isLoading: false })
+    }
+
+    setArcenum(data) {
+        this.setState({
+            arcenums: data,
+            listArcenums: data.data.map((row, index) => {
+                return ({
+                    value: row.ARCENUMKY,
+                    label: 'Ext ref: ' + row.EXTREFCODE + ', MSGCODE: ' + row.MSGCODE
+                })
+            })
+        })
+    }
+
+    setArcenumDetail(data) {
+        this.setState({
+            arcenumsSelectedDetail: data.data.length !== 0 ? data.data[0] : []
+        })
+    }
+
+    fetchFromDB2(url, method = 'GET', body = {}, callback) {
+        let _this = this;
+        let fetchData = {
+            method: method,
+            body: body,
+            headers: new Headers()
+        }
+        _this.showLoading();
+        fetch(url, fetchData)
+            .then((res) => res.json())
+            .then(function (data) {
+                callback(data);
+                _this.hideLoading();
+            })
+            .catch(function (error) {
+                _this.hideLoading();
+                console.log(error);
+            })
+    }
+
+    selectARCEnum(obj) {
+        this.setState({
+            arcenumsSelected: obj.value
+        })
+
+        if (obj.length !== 0) {
+            this.fetchFromDB2('http://169.254.199.197:3001/api/arcenums/' + obj.value, 'GET', {}, this.setArcenumDetail.bind(this))
+        } else {
+            
         }
     }
 
@@ -67,7 +135,7 @@ class Landing extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) { // fixed wasted render
-        return nextState.list !== this.state.list
+        return nextState !== this.state
     }
 
     componentDidUpdate() {
@@ -79,6 +147,7 @@ class Landing extends Component {
 
     componentWillMount() {
         // window.performance.mark('App')
+        this.fetchFromDB2('http://169.254.199.197:3001/api/arcenums', 'GET', {}, this.setArcenum.bind(this))
     }
 
     componentDidMount() {
@@ -108,6 +177,7 @@ class Landing extends Component {
     render() {
         return (
             <div className='container'>
+                <Loading position='fix' text='Loading please wait...' show={this.state.isLoading} />
                 <SkyLight
                     hideOnOverlayClicked
                     afterClose={this._executeAfterModalClose}
@@ -173,12 +243,25 @@ class Landing extends Component {
                 <h1 style={{ display: 'block' }}>React - Select</h1>
                 <div style={{ display: 'block', textAlign: 'center' }}>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                        <View styles={{ width: 33.33 + '%', margin: 1 + 'rem' }} node={<DropDown placeholder="Example select ..." className={'select--flex'} />} />
-                        <View styles={{ width: 33.33 + '%', margin: 1 + 'rem' }} node={<DropDown placeholder="Example select ..." className={'select--flex'} />} />
-                        <View styles={{ width: 33.33 + '%', margin: 1 + 'rem' }} node={<DropDown placeholder="Example select ..." className={'select--flex'} />} />
+                        <View styles={{ width: 33.33 + '%', margin: 1 + 'rem' }} node={<DropDown isAsync={true} placeholder="Example select ..." className={'select--flex'} />} />
+                        <View styles={{ width: 33.33 + '%', margin: 1 + 'rem' }} node={<DropDown isAsync={true} placeholder="Example select ..." className={'select--flex'} />} />
+                        <View styles={{ width: 33.33 + '%', margin: 1 + 'rem' }} node={<DropDown isAsync={true} placeholder="Example select ..." className={'select--flex'} />} />
                     </div>
-                    <View styles={{ margin: 1 + 'rem' }} node={<DropDown multi={true} placeholder="Example multi select ..." className={'select--flex'} />} />
+                    <View styles={{ margin: 1 + 'rem' }} node={<DropDown value={this.state.arcenumsSelected} handleChange={this.selectARCEnum.bind(this)} isAsync={false} options={this.state.listArcenums} multi={false} placeholder="Select ARCEnums" className={'select--flex'} />} />
+                    <View styles={{ margin: 1 + 'rem' }} node={<DropDown isAsync={false} options={this.state.listArcenums} multi={true} placeholder="Select ARCEnums" className={'select--flex'} />} />
                 </div>
+                {
+                    this.state.arcenumsSelected && this.state.arcenumsSelected.length !== 0 ?
+                        <pre>
+                            <h3> ARCENUMKY: {this.state.arcenumsSelected}</h3>
+                            <hr />
+                            <code style={{ wordBreak: 'break-word', whiteSpace: 'normal' }}>
+                                {
+                                    JSON.stringify(this.state.arcenumsSelectedDetail)
+                                }
+                            </code>
+                        </pre> : ''
+                }
                 <hr />
                 <h1 style={{ display: 'block' }}>Responsive Block</h1>
                 <div style={{ display: 'block', textAlign: 'center' }}>

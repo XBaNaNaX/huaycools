@@ -1,0 +1,24 @@
+.loading {
+    z-index: 2999;
+    background-color: rgba(235, 245, 255, 0.86);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    top: 0;
+    left: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    font-size: 3rem;
+}
+
+.fix {
+    position: fixed;
+}
+
+.absolute {
+    position: absolute;
+}

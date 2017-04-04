@@ -44,11 +44,25 @@ class DropDown extends Component {
 
     render() {
         return (
+            this.props.isAsync ?
             <Select.Async
                 name="form-field-name"
                 loadOptions={getOptions}
-                onChange={this.logChange.bind(this)}
-                value={this.state.value}
+                onChange={this.props.handleChange || this.logChange.bind(this)}
+                value={this.props.value || this.state.value}
+                placeholder={this.props.placeholder}
+                backspaceRemoves={true}
+                className={this.props.className}
+                multi={this.props.multi}
+                deleteRemoves={true}
+                resetValue={[]}
+            />
+            : 
+            <Select
+                name="form-field-name"
+                options={this.props.options}
+                onChange={this.props.handleChange || this.logChange.bind(this)}
+                value={this.props.value || this.state.value}
                 placeholder={this.props.placeholder}
                 backspaceRemoves={true}
                 className={this.props.className}

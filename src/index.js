@@ -17,6 +17,7 @@ import logo from './logo.svg';
 import Navs from './components/Nav'
 // import StaticNav from './components/Nav/staticNav'
 import Home from './components/Pages/Home/landing'
+import Test from './components/Pages/test'
 
 import {
     BrowserRouter as Router,
@@ -76,6 +77,7 @@ render(<
                     <Route path="/app" component={App} />
                     <Route path="/about" component={About} />
                     <Route path="/topics" component={Contact} />
+                    <Route path="/tests" component={Test}/>
                     <Route component={NotFound} />
                 </Switch>
             </div>
